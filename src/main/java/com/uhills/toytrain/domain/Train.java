@@ -4,16 +4,25 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
- * Domain object for a car.  Essentially, this consists of a linked list of train cars
+ * Domain object for a train.  Essentially, this consists of
+ * a linked list of train cars
  */
 public class Train {
-    private Deque carList;
+    private Deque<Car> cars;
+
+    public Deque<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Deque<Car> cars) {
+        this.cars = cars;
+    }
 
     /**
      * Initialize our linked list of train cars
      */
     public Train() {
-        carList = new LinkedList();
+        cars = new LinkedList<Car>();
     }
 
     /**
@@ -22,6 +31,16 @@ public class Train {
      * @param newCar
      */
     public void addCar(Car newCar) {
-        carList.addLast(newCar);
+        cars.addLast(newCar);
+    }
+
+    /**
+     * The Locomotive (or "Engine") should be added to the
+     * front of the train by default.
+     *
+     * @param newCar
+     */
+    public void addLocomotive(Locomotive locomotive) {
+        cars.addFirst(locomotive);
     }
 }
