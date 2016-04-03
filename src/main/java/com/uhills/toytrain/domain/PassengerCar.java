@@ -1,19 +1,16 @@
 package com.uhills.toytrain.domain;
 
 /**
- * Created by marchamilton on 4/2/16.
+ * PassengerCar is a type of Car. As the name suggests, it
+ * holds passengers.
+ * 
+ * For a passenger car, capacity = the number of passengers it can hold
  */
 public class PassengerCar extends Car {
 
-    // max number of passengers
-    private int capacity;
-
-    public int getCapacity() {
-        return capacity;
+    @Override
+    public long getWeight() {
+        // TODO Auto-generated method stub
+        return 0;
     }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
 }
