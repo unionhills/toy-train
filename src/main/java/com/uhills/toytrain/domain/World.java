@@ -16,9 +16,9 @@ package com.uhills.toytrain.domain;
  * create a track.
  *
  */
-public class World {
+public final class World {
     //TODO: Is a 2D primitive array good enough?
-    private Property[][] propertyLayer;  //TODO: This may need to be re-factored for efficiency as this may be very sparse
+    private Property[][] propertyLayer;  // TODO: This may need to be re-factored for efficiency as this may be very sparse
     private Terrain[][]  terrainLayer;   // Every piece of the "World" will have some form of terrain
 
     /**
