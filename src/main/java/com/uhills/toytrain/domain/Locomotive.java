@@ -6,8 +6,9 @@ package com.uhills.toytrain.domain;
  * 
  * For a Locomotive, the capacity is its towing capacity.
  * Or, in other words, the amount of weight it can pull.
+ *
  */
-public class Locomotive extends Car {
+public class Locomotive extends TrainCar {
 
     public enum EngineType {
         Steam,

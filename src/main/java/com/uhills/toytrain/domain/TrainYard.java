@@ -2,15 +2,20 @@ package com.uhills.toytrain.domain;
 
 import java.util.Collection;
 
+/**
+ * The "TrainYard" is where the train cars are kept before
+ * being put into service.
+ *
+ */
 public class TrainYard {
 
-    private Collection<Car> inventory;
+    private Collection<TrainCar> inventory;
 
-    public Collection<Car> getInventory() {
+    public Collection<TrainCar> getInventory() {
         return inventory;
     }
 
-    public void setInventory(Collection<Car> inventory) {
+    public void setInventory(Collection<TrainCar> inventory) {
         this.inventory = inventory;
     }
 }

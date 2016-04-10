@@ -6,8 +6,9 @@ package com.uhills.toytrain.domain;
  * 
  * For a FreightCar, the capacity is the amount of weight
  * it can hold.
+ *
  */
-public class FreightCar extends Car {
+public class FreightCar extends TrainCar {
 
     @Override
     public long getWeight() {

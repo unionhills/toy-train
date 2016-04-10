@@ -5,16 +5,17 @@ import java.util.LinkedList;
 
 /**
  * Domain object for a train.  Essentially, this consists of
- * a linked list of train cars
+ * a linked list of train cars.
+ *
  */
 public class Train {
-    private Deque<Car> cars;
+    private Deque<TrainCar> cars;
 
-    public Deque<Car> getCars() {
+    public Deque<TrainCar> getCars() {
         return cars;
     }
 
-    public void setCars(Deque<Car> cars) {
+    public void setCars(Deque<TrainCar> cars) {
         this.cars = cars;
     }
 
@@ -22,7 +23,7 @@ public class Train {
      * Initialize our linked list of train cars
      */
     public Train() {
-        cars = new LinkedList<Car>();
+        cars = new LinkedList<TrainCar>();
     }
 
     /**
@@ -30,7 +31,7 @@ public class Train {
      *
      * @param newCar
      */
-    public void addCar(Car newCar) {
+    public void addCar(TrainCar newCar) {
         cars.addLast(newCar);
     }
 

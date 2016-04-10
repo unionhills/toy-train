@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.uhills.toytrain.domain;
 
 /**

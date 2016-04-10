@@ -1,17 +1,28 @@
 package com.uhills.toytrain.domain;
 
 /**
- * Created by marchamilton on 4/2/16.
+ * Superclass for the different types of TrainCars.
+ *
  */
-public abstract class Car {
+public abstract class TrainCar {
 
-    // capacity will mean different things to different types of cars
+    /** capacity will mean different things to different types of cars */
     protected long capacity;
 
+    /**
+     * Returns the TrainCar's capacity.
+     *
+     * @return the capacity
+     */
     public long getCapacity() {
         return capacity;
     }
 
+    /**
+     * Sets the TrainCar's capacity.
+     *
+     * @param capacity - the new capacity
+     */
     public void setCapacity(long capacity) {
         this.capacity = capacity;
     }
