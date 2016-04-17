@@ -22,5 +22,11 @@
       <artifactId>asciitable</artifactId>
       <version>0.2.5</version>
     </dependency>
+
+    <dependency>
+      <groupId>io.bretty</groupId>
+      <artifactId>console-view</artifactId>
+      <version>3.4</version>
+    </dependency>
   </dependencies>
 </project>

@@ -1,5 +1,7 @@
 package com.uhills.toytrain.domain;
 
+import com.uhills.toytrain.domain.Terrain.TerrainType;
+
 //TODO: Watch this class to ensure it does not turn into a monstrous "God" object. It may need to be re-factored to separate concerns.
 
 /**
@@ -17,6 +19,8 @@ package com.uhills.toytrain.domain;
  *
  */
 public final class World {
+    private int         height;
+    private int         width;
     //TODO: Is a 2D primitive array good enough?
     private Property[][] propertyLayer;  // TODO: This may need to be re-factored for efficiency as this may be very sparse
     private Terrain[][]  terrainLayer;   // Every piece of the "World" will have some form of terrain
@@ -28,6 +32,9 @@ public final class World {
      * @param size - height and width of the World
      */
     public World(int size) {
+        height = size;
+        width = size;
+
         terrainLayer = new Terrain[size][size];
         propertyLayer = new Property[size][size];
     }
@@ -39,6 +46,9 @@ public final class World {
      * @param height - height of the World
      */
     public World(int width, int height) {
+        this.width = width;
+        this.height = height;
+
         terrainLayer = new Terrain[height][width];
         propertyLayer = new Property[height][width];
     }
@@ -90,5 +100,14 @@ public final class World {
         //TODO: Add bounds checking
         
         return propertyLayer[xpos][ypos];
+    }
+
+    public void initializeTerrain(TerrainType terrainType) {
+        for (int i=0; i < width; i++) {
+            for (int j=0; j < height; j++) {
+                terrainLayer[i][j] = new Terrain(terrainType);
+            }
+        }
+        
     }
 }
