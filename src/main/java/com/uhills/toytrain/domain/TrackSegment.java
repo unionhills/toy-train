@@ -15,12 +15,26 @@ package com.uhills.toytrain.domain;
  */
 public class TrackSegment implements Property {
     public enum OrientationType {
-        NorthSouth,
-        EastWest,
-        NorthWest,
-        NorthEast,
-        SouthWest,
-        SouthEast
+        NorthSouth("northSouth"),
+        EastWest  ("eastWest"),
+        NorthWest ("northWest"),
+        NorthEast ("northEast"),
+        SouthWest ("southWest"),
+        SouthEast ("southEast");
+
+        private final String name;       
+
+        private OrientationType(String name) {
+            this.name = name;
+        }
+
+        public boolean equalsName(String otherName) {
+            return (otherName == null) ? false : name.equals(otherName);
+        }
+
+        public String toString() {
+            return this.name;
+        }
     }
 
     private OrientationType orientation;
@@ -41,5 +55,10 @@ public class TrackSegment implements Property {
      */
     public void setOrientation(OrientationType orientation) {
         this.orientation = orientation;
+    }
+
+    @Override
+    public String toString() {
+        return orientation.toString();
     }
 }

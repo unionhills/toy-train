@@ -53,6 +53,14 @@ public final class World {
         propertyLayer = new Property[height][width];
     }
 
+    public Property[][] getPropertyLayer() {
+        return propertyLayer;
+    }
+
+    public Terrain[][] getTerrainLayer() {
+        return terrainLayer;
+    }
+
     /**
      * Sets the terrain at a specific World coordinate.
      *

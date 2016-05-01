@@ -7,13 +7,27 @@ package com.uhills.toytrain.domain;
  */
 public class Terrain {
     public enum TerrainType {
-        Grass,
-        Trees,
-        Water,
-        Mountain
+        Grass   ("grass"),
+        Trees   ("trees"),
+        Water   ("water"),
+        Mountain("mountain");
+
+        private final String name;       
+
+        private TerrainType(String name) {
+            this.name = name;
+        }
+
+        public boolean equalsName(String otherName) {
+            return (otherName == null) ? false : name.equals(otherName);
+        }
+
+        public String toString() {
+            return this.name;
+        }
     }
 
-    private TerrainType type;
+    private TerrainType terrainType;
 
     public Terrain(TerrainType terrainType) {
         setType(terrainType);
@@ -23,13 +37,18 @@ public class Terrain {
      * @return the type
      */
     public TerrainType getType() {
-        return type;
+        return terrainType;
     }
 
     /**
      * @param type the type to set
      */
     public void setType(TerrainType type) {
-        this.type = type;
+        this.terrainType = type;
+    }
+
+    @Override
+    public String toString() {
+        return terrainType.toString();
     }
 }
