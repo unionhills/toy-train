@@ -7,6 +7,7 @@ package com.uhills.toytrain.domain;
  */
 public class Terrain {
     public enum TerrainType {
+        Desert  ("desert"),
         Grass   ("grass"),
         Trees   ("trees"),
         Water   ("water"),

@@ -2,7 +2,6 @@ package com.uhills.toytrain.console;
 
 import java.io.PrintStream;
 
-import com.uhills.toytrain.domain.Terrain;
 import com.uhills.toytrain.domain.World;
 
 import de.vandermeer.asciitable.v2.RenderedTable;
@@ -23,17 +22,21 @@ public class WorldConsoleRenderer {
         outputStream = stream;
     }
 
-    public void printTerrainLayer(Terrain[][] terrainLayer) {
+    public void printLayer(Object[][] layer) {
         V2_AsciiTable asciiTable = new V2_AsciiTable();
 
-        for (int i=0; i < terrainLayer.length; i++) {
+        for (int i=0; i < layer.length; i++) {
             asciiTable.addRule();
-            asciiTable.addRow(terrainLayer[i]);
+            asciiTable.addRow(layer[i]);
         }
 
         asciiTable.addRule();
 
         V2_AsciiTableRenderer renderer = new V2_AsciiTableRenderer();
+
+//      Outputs as question marks
+//      renderer.setTheme(V2_E_TableThemes.UTF_LIGHT.get());
+
         renderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
         renderer.setWidth(new WidthLongestWord());
 
@@ -43,7 +46,10 @@ public class WorldConsoleRenderer {
     }
 
 	public void printWorld(World theWorld) {
-	    printTerrainLayer(theWorld.getTerrainLayer());
-	    //TODO: printSceneryLayer(theWorld.getSceneryLayer());
+	    outputStream.println("\nRendering property");
+	    printLayer(theWorld.getPropertyLayer());
+
+        outputStream.println("\nRendering terrain");
+        printLayer(theWorld.getTerrainLayer());
 	}
 }

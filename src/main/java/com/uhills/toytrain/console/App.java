@@ -1,6 +1,8 @@
 package com.uhills.toytrain.console;
 
 import com.uhills.toytrain.domain.*;
+import com.uhills.toytrain.domain.Scenery.SceneryType;
+import com.uhills.toytrain.domain.TrackSegment.OrientationType;
 
 public class App {
 
@@ -11,9 +13,32 @@ public class App {
         worldRenderer = new WorldConsoleRenderer();
     }
 
+    private void buildCircularTrack(int height, int width) {
+        for (int row=0; row < height; row++) {
+            theWorld.setPropertyAt(row, 0, new TrackSegment(OrientationType.NorthSouth));
+            theWorld.setPropertyAt(row, width-1, new TrackSegment(OrientationType.NorthSouth));
+        }
+
+        for (int col=0; col < width; col++) {
+            theWorld.setPropertyAt(0, col, new TrackSegment(OrientationType.EastWest));
+            theWorld.setPropertyAt(height-1, col, new TrackSegment(OrientationType.EastWest));
+        }
+
+        theWorld.setPropertyAt(0, 0, new TrackSegment(OrientationType.SouthEast));
+        theWorld.setPropertyAt(height-1, 0, new TrackSegment(OrientationType.NorthEast));
+        theWorld.setPropertyAt(0, width-1, new TrackSegment(OrientationType.SouthWest));
+        theWorld.setPropertyAt(height-1, width-1, new TrackSegment(OrientationType.NorthWest));
+    }
+    
     public void createSampleWorld() {
-        theWorld = new World(5, 5);
+        int height = 5;
+        int width = 6;
+
+        theWorld = new World(height, width);
         theWorld.initializeTerrain(Terrain.TerrainType.Grass);
+        theWorld.initializeProperty(SceneryType.Foliage);
+
+        buildCircularTrack(height, width);
     }
 
     public void displayWorld() {

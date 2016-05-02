@@ -1,5 +1,6 @@
 package com.uhills.toytrain.domain;
 
+import com.uhills.toytrain.domain.Scenery.SceneryType;
 import com.uhills.toytrain.domain.Terrain.TerrainType;
 
 //TODO: Watch this class to ensure it does not turn into a monstrous "God" object. It may need to be re-factored to separate concerns.
@@ -19,8 +20,11 @@ import com.uhills.toytrain.domain.Terrain.TerrainType;
  *
  */
 public final class World {
+    /** X-axis */
     private int         height;
+    /** Y-axis */
     private int         width;
+
     //TODO: Is a 2D primitive array good enough?
     private Property[][] propertyLayer;  // TODO: This may need to be re-factored for efficiency as this may be very sparse
     private Terrain[][]  terrainLayer;   // Every piece of the "World" will have some form of terrain
@@ -32,22 +36,18 @@ public final class World {
      * @param size - height and width of the World
      */
     public World(int size) {
-        height = size;
-        width = size;
-
-        terrainLayer = new Terrain[size][size];
-        propertyLayer = new Property[size][size];
+        this(size, size);
     }
 
     /**
      * The world must be initialized with dimensions.
      * 
-     * @param width - width of the World
      * @param height - height of the World
+     * @param width - width of the World
      */
-    public World(int width, int height) {
-        this.width = width;
+    public World(int height, int width) {
         this.height = height;
+        this.width = width;
 
         terrainLayer = new Terrain[height][width];
         propertyLayer = new Property[height][width];
@@ -64,58 +64,76 @@ public final class World {
     /**
      * Sets the terrain at a specific World coordinate.
      *
-     * @param xpos - x coordinate to place Terrain
-     * @param ypos - y coordinate to place Terrain
+     * @param row - row coordinate to place Terrain
+     * @param col - column coordinate to place Terrain
      * @param terrain - the new Terrain object
      */
-    public void setTerrainAt(int xpos, int ypos, Terrain terrain) {
-        terrainLayer[xpos][ypos] = terrain;
+    public void setTerrainAt(int row, int col, Terrain terrain) {
+        terrainLayer[row][col] = terrain;
     }
 
     /**
      * Gets the terrain at a specific World coordinate.
      *
-     * @param xpos - x coordinate to place Terrain
-     * @param ypos - y coordinate to place Terrain
+     * @param row - row coordinate to place Terrain
+     * @param col - column coordinate to place Terrain
      * @return the Terrain object at the given coordinates
      */
-    public Terrain getTerrainAt(int xpos, int ypos) {
+    public Terrain getTerrainAt(int row, int col) {
         //TODO: Add bounds checking
         
-        return terrainLayer[xpos][ypos];
+        return terrainLayer[row][col];
     }
 
     /**
      * Sets the Property at a specific World coordinate.
      *
-     * @param xpos - x coordinate to place Property
-     * @param ypos - y coordinate to place Property
+     * @param row - row coordinate to place Property
+     * @param col - column coordinate to place Property
      * @param property - the new Property object
      */
-    public void setPropertyAt(int xpos, int ypos, Property property) {
+    public void setPropertyAt(int row, int col, Property property) {
         //TODO: Add business rules around what kind of Property can be added to the underlying Terrain
-        propertyLayer[xpos][ypos] = property;
+        propertyLayer[row][col] = property;
     }
 
     /**
      * Gets the terrain at a specific World coordinate.
      *
-     * @param xpos - x coordinate to place Property
-     * @param ypos - y coordinate to place Property
+     * @param row - row coordinate to place Property
+     * @param col - column coordinate to place Property
      * @return the Property object at the given coordinates
      */
-    public Property getPropertyAt(int xpos, int ypos) {
+    public Property getPropertyAt(int row, int col) {
         //TODO: Add bounds checking
         
-        return propertyLayer[xpos][ypos];
+        return propertyLayer[row][col];
     }
 
+    /**
+     * Sets all of the terrain to one type.
+     * 
+     * @param terrainType - the type of terrain to set
+     */
     public void initializeTerrain(TerrainType terrainType) {
-        for (int i=0; i < width; i++) {
-            for (int j=0; j < height; j++) {
-                terrainLayer[i][j] = new Terrain(terrainType);
+        for (int row=0; row < height; row++) {
+            for (int col=0; col < width; col++) {
+                terrainLayer[row][col] = new Terrain(terrainType);
             }
         }
-        
     }
+
+    /**
+     * Sets all of the Property to one type of Scenery.
+     * 
+     * @param sceneryType - the type of scenery to set
+     */
+    public void initializeProperty(SceneryType sceneryType) {
+        for (int row=0; row < height; row++) {
+            for (int col=0; col < width; col++) {
+                propertyLayer[row][col] = new Scenery(sceneryType);
+            }
+        }
+    }
+
 }

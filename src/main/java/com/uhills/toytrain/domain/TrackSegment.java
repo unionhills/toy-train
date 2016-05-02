@@ -40,6 +40,15 @@ public class TrackSegment implements Property {
     private OrientationType orientation;
 
     /**
+     * An orientation must be supplied on the constructor
+     * 
+     * @param orientation - the orientation of the track segment
+     */
+    public TrackSegment(OrientationType orientation) {
+        this.orientation = orientation;
+    }
+
+    /**
      * Returns the track segment orientation.
      *
      * @return the track segment orientation.
