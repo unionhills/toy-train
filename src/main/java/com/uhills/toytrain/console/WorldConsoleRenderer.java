@@ -3,6 +3,7 @@ package com.uhills.toytrain.console;
 import java.io.PrintStream;
 
 import com.uhills.toytrain.domain.World;
+import com.uhills.toytrain.domain.Train;
 
 import de.vandermeer.asciitable.v2.RenderedTable;
 import de.vandermeer.asciitable.v2.V2_AsciiTable;
@@ -22,6 +23,20 @@ public class WorldConsoleRenderer {
         outputStream = stream;
     }
 
+    private void printTable(V2_AsciiTable asciiTable) {
+        V2_AsciiTableRenderer renderer = new V2_AsciiTableRenderer();
+
+//      Outputs as question marks on Windows
+        renderer.setTheme(V2_E_TableThemes.UTF_LIGHT.get());
+
+//      renderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
+        renderer.setWidth(new WidthLongestWord());
+
+        RenderedTable renderedTable = renderer.render(asciiTable);
+
+        outputStream.println(renderedTable);
+    }
+
     public void printLayer(Object[][] layer) {
         V2_AsciiTable asciiTable = new V2_AsciiTable();
 
@@ -32,20 +47,23 @@ public class WorldConsoleRenderer {
 
         asciiTable.addRule();
 
-        V2_AsciiTableRenderer renderer = new V2_AsciiTableRenderer();
+        printTable(asciiTable);
+    }
 
-//      Outputs as question marks
-//      renderer.setTheme(V2_E_TableThemes.UTF_LIGHT.get());
+    public void printTrain(Train train) {
+        V2_AsciiTable asciiTable = new V2_AsciiTable();
 
-        renderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
-        renderer.setWidth(new WidthLongestWord());
+        asciiTable.addRule();
+        asciiTable.addRow(train.getCars().toArray());
+        asciiTable.addRule();
 
-        RenderedTable renderedTable = renderer.render(asciiTable);
-
-        outputStream.println(renderedTable);
+        printTable(asciiTable);
     }
 
 	public void printWorld(World theWorld) {
+        outputStream.println("\nRendering train");
+        printTrain(theWorld.getTrain());
+
 	    outputStream.println("\nRendering property");
 	    printLayer(theWorld.getPropertyLayer());
 

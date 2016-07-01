@@ -45,11 +45,28 @@ public class App {
         worldRenderer.printWorld(theWorld);
     }
 
+    private Train buildTrain() {
+        Train theTrain = new Train();
+
+        theTrain.addCar(new Locomotive(Locomotive.EngineType.Electric));
+        theTrain.addCar(new FreightCar());
+        theTrain.addCar(new PassengerCar());
+        theTrain.addCar(new FreightCar());
+        theTrain.addCar(new FreightCar());
+
+        theWorld.placeTrainAt(0, 0, theTrain);
+
+        return theTrain;
+    }
+
     public static void main(String[] args) {
         App app = new App();
 
         System.out.println("Creating sample world");
         app.createSampleWorld();
+
+        System.out.println("Building sample train");
+        app.buildTrain();
 
         System.out.println("Rendering world");
         app.displayWorld();

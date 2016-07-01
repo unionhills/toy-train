@@ -37,4 +37,13 @@ public class Locomotive extends TrainCar {
         // TODO Auto-generated method stub
         return 0;
     }
+
+    public Locomotive(EngineType engineType) {
+        setEngineType(engineType);
+    }
+
+    @Override
+    public String toString() {
+        return "Locomotive";
+    }
 }

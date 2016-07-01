@@ -28,7 +28,10 @@ public final class World {
     //TODO: Is a 2D primitive array good enough?
     private Property[][] propertyLayer;  // TODO: This may need to be re-factored for efficiency as this may be very sparse
     private Terrain[][]  terrainLayer;   // Every piece of the "World" will have some form of terrain
-
+    private Train train;
+    private int trainRowPos = 0;
+    private int trainColPos = 0;
+    
     /**
      * This version of the constructor creates a square world
      * using the size for both the height and width.
@@ -136,4 +139,13 @@ public final class World {
         }
     }
 
+    public void placeTrainAt(int row, int col, Train train) {
+        this.train = train;
+        this.trainRowPos = row;
+        this.trainColPos = col;
+    }
+
+    public Train getTrain() {
+        return train;
+    }
 }
