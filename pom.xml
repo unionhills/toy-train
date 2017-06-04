@@ -24,7 +24,7 @@
           <arguments>
             <argument>-classpath</argument>
             <classpath />
-            <argument>com.uhills.toytrain.console.App</argument>
+              <argument>com.uhills.toytrain.console.App</argument>
           </arguments>
         </configuration>
       </plugin>
