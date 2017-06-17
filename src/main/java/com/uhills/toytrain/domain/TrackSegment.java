@@ -22,6 +22,11 @@ public class TrackSegment implements Property {
         SouthWest ("southWest"),
         SouthEast ("southEast");
 
+//TODO: We probably need other specialty track segments, such as 
+//      - one that indicate the end of the line.
+//      - track merging segments.
+//      - track switchers (this might actually force a refactor)
+
         private final String name;       
 
         private OrientationType(String name) {

@@ -18,13 +18,20 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>1.4.0</version>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <executable>java</executable>
           <arguments>
             <argument>-classpath</argument>
             <classpath />
-              <argument>com.uhills.toytrain.console.App</argument>
+            <argument>com.uhills.toytrain.console.App</argument>
           </arguments>
         </configuration>
       </plugin>
@@ -50,5 +57,11 @@
       <artifactId>console-view</artifactId>
       <version>3.4</version>
     </dependency>
+
+	<dependency>
+	  <groupId>org.apache.commons</groupId>
+	  <artifactId>commons-lang3</artifactId>
+	  <version>3.6</version>
+	</dependency>
   </dependencies>
  </project>

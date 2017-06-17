@@ -5,6 +5,8 @@ import java.io.PrintStream;
 import com.uhills.toytrain.domain.World;
 import com.uhills.toytrain.domain.Train;
 
+import org.apache.commons.lang3.SystemUtils;
+
 import de.vandermeer.asciitable.v2.RenderedTable;
 import de.vandermeer.asciitable.v2.V2_AsciiTable;
 import de.vandermeer.asciitable.v2.render.V2_AsciiTableRenderer;
@@ -26,10 +28,15 @@ public class WorldConsoleRenderer {
     private void printTable(V2_AsciiTable asciiTable) {
         V2_AsciiTableRenderer renderer = new V2_AsciiTableRenderer();
 
-//      Outputs as question marks on Windows
         renderer.setTheme(V2_E_TableThemes.UTF_LIGHT.get());
 
-//      renderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
+        if (SystemUtils.IS_OS_WINDOWS) {
+            renderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
+        }
+        else {
+            renderer.setTheme(V2_E_TableThemes.UTF_LIGHT.get());
+        }
+
         renderer.setWidth(new WidthLongestWord());
 
         RenderedTable renderedTable = renderer.render(asciiTable);
