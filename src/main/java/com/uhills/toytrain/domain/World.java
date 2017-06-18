@@ -1,12 +1,14 @@
 package com.uhills.toytrain.domain;
 
+import com.uhills.toytrain.util.RowColumnCoordinate;
+
 import com.uhills.toytrain.domain.Scenery.SceneryType;
 import com.uhills.toytrain.domain.Terrain.TerrainType;
 
 //TODO: Watch this class to ensure it does not turn into a monstrous "God" object. It may need to be re-factored to separate concerns.
 
 /**
- * The World consists as a 2 dimensional grid with layers.
+ * The World consists of layers of 2 dimensional grids.
  *
  * The underlying layer is the "Terrain".  This describes the
  * characteristics of the "land".  (i.e. grass, water, trees, etc.)
@@ -16,21 +18,29 @@ import com.uhills.toytrain.domain.Terrain.TerrainType;
  * enhance the Terrain.
  * 
  * Property also consists of the TrackSegments which are used to
- * create a track.
+ * create a track. Business rules will probably be established as far
+ * as what type of land a track can be placed on top of.  For example,
+ * a track should probably be able to be placed on top of trees or water
+ * (then again, we could create a bridge over the water).
  *
  */
 public final class World {
-    /** X-axis */
+    /** Number of rows */
     private int         height;
-    /** Y-axis */
+    /** Number of columns */
     private int         width;
 
     //TODO: Is a 2D primitive array good enough?
     private Property[][] propertyLayer;  // TODO: This may need to be re-factored for efficiency as this may be very sparse
     private Terrain[][]  terrainLayer;   // Every piece of the "World" will have some form of terrain
+
+    /**
+     * There is no "train layer"...
+     * We're assuming there's only one "train" on the track at a given time for now.  We're letting the World manage
+     * the position of the train on the track instead of the train itself.  We may need to re-evaluate that approach later.
+     */
+    private RowColumnCoordinate trainPosition;
     private Train train;
-    private int trainRowPos = 0;
-    private int trainColPos = 0;
     
     /**
      * This version of the constructor creates a square world
@@ -56,11 +66,42 @@ public final class World {
         propertyLayer = new Property[height][width];
     }
 
+
+    /**
+     * @return the height
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * @return the width
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * Returns the property layer. 
+     * 
+     * @return
+     */
     public Property[][] getPropertyLayer() {
+        //TODO: This getter method may not be a good idea as it could
+        //      be seen as exposing too much of the inner implementation
+        //      and thereby breaking the norms of encapsulation
         return propertyLayer;
     }
 
+    /**
+     * Returns the terrain layer
+     * 
+     * @return
+     */
     public Terrain[][] getTerrainLayer() {
+        //TODO: This getter method may not be a good idea as it could
+        //      be seen as exposing too much of the inner implementation
+        //      and thereby breaking the norms of encapsulation
         return terrainLayer;
     }
 
@@ -139,12 +180,45 @@ public final class World {
         }
     }
 
+    /**
+     * Places the train at a specific row, column position in the World.
+     * 
+     * @param row
+     * @param col
+     * @param train
+     */
+
     public void placeTrainAt(int row, int col, Train train) {
-        this.train = train;
-        this.trainRowPos = row;
-        this.trainColPos = col;
+        placeTrainAt(new RowColumnCoordinate(row, col), train);
     }
 
+    /**
+     * Places the train at a specific coordinate in the world.
+     * 
+     * @param row
+     * @param col
+     * @param train
+     */
+    public void placeTrainAt(RowColumnCoordinate coordinate, Train train) {
+        this.train = train;
+
+        this.trainPosition = coordinate;
+    }
+
+    /**
+     * Returns the train's position in the World
+     * 
+     * @return
+     */
+    public RowColumnCoordinate getTrainPosition() {
+        return this.trainPosition;
+    }
+
+    /**
+     * Returns the train
+     * 
+     * @return
+     */
     public Train getTrain() {
         return train;
     }

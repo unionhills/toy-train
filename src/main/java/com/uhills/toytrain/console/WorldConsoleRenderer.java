@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import com.uhills.toytrain.domain.World;
 import com.uhills.toytrain.domain.Train;
+import com.uhills.toytrain.util.RowColumnCoordinate;
 
 import org.apache.commons.lang3.SystemUtils;
 
@@ -57,6 +58,34 @@ public class WorldConsoleRenderer {
         printTable(asciiTable);
     }
 
+    public void printTrainLayer(int maxRows, int maxCols, RowColumnCoordinate trainPosition) {
+        V2_AsciiTable asciiTable = new V2_AsciiTable();
+
+        for (int i=0; i < maxRows; i++) {
+            asciiTable.addRule();
+
+            String[]    row = new String[maxCols];
+
+            for (int j=0; j < maxCols; j++) {
+                if (trainPosition.getRow() == i &&
+                    trainPosition.getColumn() == j) {
+                    row[j] = "train";
+                }
+                else {
+                    row[j] = " - ";
+                }
+            }
+
+            // Seriously? Why do we have to cast row to an Object[] to avoid the compiler warning?
+            // Isn't String inherited from Object just like every other Java class???
+            asciiTable.addRow((Object[]) row);
+        }
+
+        asciiTable.addRule();
+        
+        printTable(asciiTable);
+    }
+
     public void printTrain(Train train) {
         V2_AsciiTable asciiTable = new V2_AsciiTable();
 
@@ -70,6 +99,9 @@ public class WorldConsoleRenderer {
 	public void printWorld(World theWorld) {
         outputStream.println("\nRendering train");
         printTrain(theWorld.getTrain());
+
+        outputStream.println("\nRendering train \"layer\"");
+        printTrainLayer(theWorld.getHeight(), theWorld.getWidth(), theWorld.getTrainPosition());
 
 	    outputStream.println("\nRendering property");
 	    printLayer(theWorld.getPropertyLayer());

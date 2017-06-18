@@ -54,7 +54,7 @@ public class App {
         theTrain.addCar(new FreightCar());
         theTrain.addCar(new FreightCar());
 
-        theWorld.placeTrainAt(0, 0, theTrain);
+        theWorld.placeTrainAt(0, 1, theTrain);
 
         return theTrain;
     }
